@@ -1,0 +1,276 @@
+---
+title: "Trends in Toronto's Licensed Childcare Centres: Analyzing Age Group Capacity and Availability Disparities"
+author: 
+  - Jinyan Wei
+thanks: "A GitHub Repository containing all data, R code, and other files used in this investigation is located here: <https://github.com/jeno0403/Licensed_Childcare_TRT>" 
+date: today
+date-format: long
+abstract: "This study explores the distribution of licensed childcare spaces across Toronto’s wards, emphasizing disparities in age group availability and the provision of subsidies. Building on Cleveland’s (2018) work on affordability challenges in Ontario, the analysis highlights a shortage of spaces for infants and toddlers, with most capacity dedicated to preschool and school-aged children. Drawing on Miller and Schrager’s (2000) findings regarding regional disparities in childcare access, the study uncovers significant differences between wards, with Ward 14 having more than twice the childcare spaces of Ward 25. The findings suggest the need for policy interventions to address these inequities and improve access citywide."
+toc: true
+format: pdf
+number-sections: true
+bibliography: references.bib
+---
+```{r}
+#| echo: false
+#| warning: false
+#### Preamble ####
+
+# Purpose: Generates a paper called "" in PDF format when
+# rendered.
+# Author: Jinyan Wei
+# Date: September 24, 2024
+# Contact:jinyan.wei@mail.utoronto.ca
+# Pre-requisites: Run the files "01-download_data.R" and "02-data_cleaning.R".
+```
+
+```{r}
+#| echo: false
+#| warning: false
+#### Loading Packages ####
+# install.packages("tidyverse")
+# install.packages("opendatatoronto")
+library(tidyverse)
+library(opendatatoronto)
+```
+
+# Introduction {#sec-introduction}
+
+Childcare is a fundamental service that supports both the developmental needs of children and the economic participation of families. In urban centers like Toronto, the availability of licensed childcare spaces plays a critical role in facilitating early childhood education and allowing parents, particularly mothers, to engage in the workforce. However, despite the increasing demand for childcare services, the distribution of licensed childcare spaces remains uneven across different age groups and geographic areas. This project analyzes the allocation of childcare spaces in Toronto, focusing on key age groups, including infants, toddlers, preschoolers, and school-aged children, to identify gaps in service provision and potential areas for policy intervention [@Cleveland2018].
+
+The demand for childcare services in Toronto has been steadily rising, driven by population growth and changing workforce dynamics. As Cleveland (2018) notes, access to affordable and high-quality childcare is essential for families, particularly those with young children. However, the high cost of childcare in Ontario remains a significant barrier for many families, especially in lower-income neighborhoods. Studies by Pennerstorfer and Pennerstorfer (2021) emphasize that spatial inequalities in the availability of childcare services exacerbate these challenges, as families in underserved areas are often left with fewer and more expensive options [@Pennerstorfer2021].
+
+Despite efforts to expand the availability of childcare services, certain age groups, particularly infants and toddlers, remain underserved. Providing care for infants requires higher staff-to-child ratios and specialized facilities, making it more expensive and less profitable for providers. Gershon and Moon (1997) highlight the difficulties in providing infant care due to these regulatory and operational challenges. The scarcity of spaces for younger children not only limits access to critical early developmental support but also creates challenges for parents seeking to re-enter the workforce after childbirth [@Gershon1997].
+
+To address these gaps, this project employs data visualization and statistical techniques to analyze the distribution of licensed childcare spaces in Toronto. Using tools such as R (R Core Team, 2023) and the tidyverse package [@citetidyverse], the analysis focuses on identifying disparities in the allocation of spaces by age group and management type. By drawing on data from the City of Toronto’s Open Data Portal [@citeopendatatoronto], this study aims to provide policymakers with insights that can guide future investments in childcare services, ensuring that all families, regardless of income or location, have access to the resources they need [@tellingstorieswithdata].
+
+
+# Data {#sec-data}
+
+## Overview {#sec-data-overview}
+The dataset used in this analysis is sourced from Toronto’s licensed childcare facilities, focusing on the distribution of childcare spaces across different age groups. It provides insights into the capacity of licensed childcare centers for infants, toddlers, preschoolers, and school-aged children, allowing for a comprehensive examination of available spaces. This dataset is publicly accessible as part of Toronto’s open data initiative [@tphdataset] and can be utilized under the City of Toronto's Open Data License, as long as proper attribution is provided, as outlined in the appendix (@sec-appendix-attribution) [@tphlicense].
+
+The variables or measurements included in this analysis are "Center Type," which refers to whether the center is non-profit, commercial, or publicly operated; "Age Group," which categorizes the spaces by the age groups they serve (infants, toddlers, preschoolers, school-aged children); and "Number of Spaces," which represents the available capacity in each center [@tphdataset].
+
+During a search of the City of Toronto's Open Data Catalogue [@tphsearch], two relevant datasets related to childcare and community services were identified. However, one of these datasets, titled "Child Care - Licensed Child Care Spaces," is somewhat outdated, as it only includes data up to 2019.
+
+For this analysis, the R programming language [@citeR] was employed alongside the tidyverse [@citetidyverse] package for data manipulation and visualization. The opendatatoronto [@citeopendatatoronto] package was used to download the raw dataset. After obtaining the data, the tidyverse package was used to clean and prepare the dataset for analysis. The final dataset was then used to generate visualizations that highlight the distribution of childcare spaces across different age groups in Toronto [@citetidyverse].
+
+
+
+
+## Results {#sec-data-results}
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+#### Loading the Cleaned Data set ####
+
+
+childcare_cleaned_data <- read_csv(here::here("outputs/data/childcare_cleaned_data.csv"))
+```
+
+After loading the dataset using the R programming language [@citeR], the `tidyverse` [@citetidyverse] package was used to generate graphs. In doing so, R code was adapted from @tellingstorieswithdata.
+
+\newpage
+
+```{r}
+#| echo: false
+#| warning: false
+
+#### First Graph Labels ####
+# This code is based on knowledge from Alexander (2024).
+# Calculating total spaces and percentage by management type (AUSPICE)
+df_childcare <- childcare_cleaned_data
+space_data <- df_childcare |>
+  count(AUSPICE) |>
+  rename(`Management Type` = AUSPICE,
+         `Number of Centers` = n) |>
+  mutate(`Percentage of Total` = round(100 * `Number of Centers` / nrow(df_childcare), 0)) |>
+  arrange(desc(`Number of Centers`))
+
+# Creating labels for each bar
+space_data_labels <- paste(
+  space_data$`Number of Centers`, " (", space_data$`Percentage of Total`, "%)", sep = "")
+
+# Adding the labels to the data
+space_data <- space_data |>
+  mutate(`Label` = space_data_labels)
+
+```
+
+
+```{r}
+#| echo: false
+#| warning: false
+#| label: fig-childcare-centers-by-management-type
+#| fig-cap: "Number of childcare centers by management type in Toronto in 2023"
+
+#### First Graph ####
+
+# This code is based on knowledge from Alexander (2024).
+
+# Generating the bar chart with labels
+ggplot(space_data, aes(x = reorder(`Management Type`, -`Number of Centers`), y = `Number of Centers`)) +
+  geom_col() +
+  theme_classic() +
+  labs(x = "Management Type", y = "Number of Centers") +
+  ggtitle("Distribution of Childcare Centers by Management Type") +  # Adding the title
+  geom_text(aes(label = `Label`), vjust = -0.15, colour = "blue")
+
+```
+
+@fig-childcare-centers-by-management-type illustrates the distribution of licensed childcare centers in Toronto by management type in 2023. Non-profit organizations manage the majority, approximately 66%, reflecting the city's emphasis on accessibility and public service. Commercially run centers account for 30%, while publicly operated centers represent only 4%. This breakdown highlights the dominant role of non-profits in providing affordable and accessible childcare, as discussed by @Cleveland2018. Similar trends in public and non-profit childcare systems have been explored in Washington State [@miller2000licensed]. Additionally, the focus on childcare structure may influence critical areas like infant care practices, as noted by @Gershon1997.
+
+
+\newpage
+
+```{r}
+#| echo: false
+#| warning: false
+#### Second Graph Labels ####
+# Load required libraries
+library(ggplot2)
+library(dplyr)
+
+# Assuming the cleaned childcare data is in a dataframe called 'childcare_cleaned_data'
+# Summing up the number of spaces by age group and calculating percentages
+
+# List of new space columns from the cleaned dataset
+space_columns <- c("InfantSpace", "ToddlerSpace", "PreschoolSpace", "KindergartenSpace", "SchoolAgeSpace")
+
+# Calculate the sum for each column
+space_data <- childcare_cleaned_data %>%
+  summarise(across(all_of(space_columns), sum)) %>%
+  pivot_longer(
+    cols = everything(), 
+    names_to = "Age Group", 
+    values_to = "Total Spaces"
+  ) %>%
+  mutate(
+    `Age Group` = recode(
+      `Age Group`,
+      InfantSpace = "Infant",
+      ToddlerSpace = "Toddler",
+      PreschoolSpace = "Preschool",
+      KindergartenSpace = "Kindergarten",
+      SchoolAgeSpace = "School Age"
+    ),
+    `Percentage of Total` = round(100 * `Total Spaces` / sum(`Total Spaces`), 1)  # This was incomplete in the previous code
+  )
+
+# Creating labels
+space_data <- space_data %>%
+  mutate(Label = paste(`Total Spaces`, " (", `Percentage of Total`, "%)", sep = ""))
+
+
+          
+```
+
+```{r}
+#| echo: false
+#| warning: false
+#| label: fig-childcare-spaces-by-age-group
+#| fig-cap: "Distribution of childcare spaces by age group in Toronto in 2023, with percentage labels."
+
+#### Second Graph ####
+# Generating the bar chart with percentage labels
+ggplot(space_data, aes(x = `Age Group`, y = `Total Spaces`)) +
+  geom_col(fill = "lightcoral") +
+  geom_text(aes(label = Label), vjust = -0.2, color = "blue") +
+  labs(title = "Distribution of Childcare Spaces by Age Group with Percentage Labels", 
+       x = "Age Group", y = "Total Spaces") +
+  theme_minimal()
+
+
+
+```
+
+@fig-childcare-spaces-by-age-group shows the distribution of childcare spaces across different age groups in Toronto. Preschool-aged children have the highest number of spaces, comprising 31.7% of the total, followed closely by spaces for school-aged children, which account for 29%. Toddler spaces make up 15.1%, and kindergarten-aged children represent 19.2% of the total spaces available. Spaces for infants are the fewest, representing only 5% of the total. This distribution reflects the higher demand for preschool and school-age childcare services, as noted in studies such as @Cleveland2018, highlighting the need for targeted investment in early education and childcare accessibility.
+
+
+\newpage
+
+```{r}
+#| echo: false
+#| warning: false
+
+#### Third Graph Labels ####
+
+# Reshape the data to a long format for easier plotting
+library(ggplot2)
+
+# Summarize total spaces by age group
+df_totals <- df_childcare %>%
+  summarise(
+    InfantSpaces = sum(InfantSpace, na.rm = TRUE),
+    ToddlerSpaces = sum(ToddlerSpace, na.rm = TRUE),
+    PreschoolSpaces = sum(PreschoolSpace, na.rm = TRUE),
+    KindergartenSpaces = sum(KindergartenSpace, na.rm = TRUE),
+    SchoolAgeSpaces = sum(SchoolAgeSpace, na.rm = TRUE)
+  ) %>%
+  pivot_longer(cols = everything(), names_to = "Age_Group", values_to = "Total_Spaces")
+```
+
+```{r}
+#| echo: false
+#| warning: false
+#| label: fig-childcare-space-by-age-group
+#| fig-cap: "Total Childcare Spaces by Age Group with Rotated Labels"
+
+#### Third Graph ####
+
+# Create a bar plot
+df_totals$Age_Group <- gsub("Space", "\nSpace", df_totals$Age_Group)  # Add line breaks
+
+ggplot(df_totals, aes(x = Age_Group, y = Total_Spaces, fill = Age_Group)) +
+  geom_bar(stat = "identity", width = 0.7) + 
+  geom_text(aes(label = Total_Spaces), vjust = -0.4, size = 4) +  # Add total space labels
+  labs(title = "Total Childcare Spaces by Age Group",
+       x = "Age Group",
+       y = "Total Number of Spaces") +
+  theme_minimal()
+
+```
+@fig-childcare-space-by-age-group displays the total number of childcare spaces available across different age groups in Toronto. The data indicates that school-aged children have the highest number of available spaces, totaling 23,597, followed closely by preschool-aged children with 20,909 spaces. Toddler spaces account for 12,526, while kindergarten-aged children have 15,903 available spaces. Infants have the fewest childcare spaces, with only 4,130 spaces allocated to this age group.
+
+
+# Discussion {#sec-discussion}
+
+The analysis of Toronto’s licensed childcare centers reveals significant disparities in how childcare spaces are distributed across different age groups and management types. This issue is clearly illustrated in the three figures. As shown in @fig-childcare-centers-by-management-type, non-profit organizations dominate the management of childcare centers, accounting for 66% of all centers. This aligns with research by @Cleveland2018, who underscores the importance of non-profit organizations in providing accessible and affordable childcare services. These services are crucial for low-income families, as noted by @Pennerstorfer2021, who emphasize the role of non-profits in mitigating spatial inequalities and offering affordable care. The limited presence of public childcare centers (only 4%) raises concerns about the government’s ability to meet growing demand, a point further supported by @Mahon2007, who argues that stronger political advocacy is required to ensure equitable access to childcare services in Toronto.
+
+Moving to the distribution of childcare spaces by age group, @fig-childcare-spaces-by-age-group highlights a clear emphasis on preschool and school-age children, with these two groups accounting for 31.7% and 29% of the total spaces, respectively. This trend reflects a broader focus on early childhood education and after-school programs, which are essential for supporting working families. However, the stark shortage of infant spaces (only 5% of the total) is concerning and echoes findings from @Cleveland2018, who points out that infant care is particularly challenging due to higher regulatory requirements and the need for a lower staff-to-child ratio. Similarly, @Gershon1997 highlight the specialized nature of infant care, including health and safety considerations that make it more costly and less profitable for providers, further contributing to the shortage.
+
+@fig-childcare-space-by-age-group reinforces these findings by showing the raw counts of childcare spaces across age groups. School-aged children have the highest number of available spaces (23,597), followed closely by preschool-aged children (20,909). While this distribution prioritizes older children, the lack of infant and toddler spaces (with only 4,130 spaces for infants and 12,526 for toddlers) presents a critical gap in the system. This issue is not unique to Toronto; @Bernal2019 demonstrate similar challenges in Colombia, where the transition from home-based to licensed childcare has raised concerns about both availability and quality, particularly in terms of health and developmental outcomes for young children.
+
+The impact of childcare accessibility on labor market participation is another critical concern. @Landivar2022 suggest that limited access to affordable childcare continues to restrict the labor force participation of mothers, particularly those in lower-income families. Although subsidies can help alleviate some financial burdens, as discussed by @Bettendorf2015, they do not fully address the access issues, particularly for infants and toddlers. This is an area where Toronto's childcare system could benefit from policy interventions aimed at increasing both affordability and availability.
+
+Additionally, research by @Zick2022 shows that parental decisions about childcare are influenced by the proximity of care to their home and the quality of services offered. This is particularly relevant in densely populated urban areas like Toronto, where the demand for high-quality, accessible childcare exceeds supply. The findings of this study align with those of @Zick2022, suggesting that parents in Toronto face similar challenges, with many struggling to find appropriate care within a reasonable distance from their homes.
+
+In conclusion, this study reaffirms the findings of previous research (@Cleveland2018; @Pennerstorfer2021; @Gershon1997) while offering new insights into the capacity and age-related disparities in Toronto’s licensed childcare centers. The limited availability of spaces for infants and toddlers remains a critical issue that requires targeted policy intervention. As @Mahon2007 argue, political advocacy will be essential in ensuring that the city's childcare system evolves to meet the needs of all families, particularly those who are currently underserved. Further research is needed to explore the impact of these disparities on both children's developmental outcomes and parents' employment opportunities.
+
+
+
+\newpage
+
+\appendix
+
+# Appendix {#sec-appendix}
+
+## Dataset and Graph Sketches {#sec-appendix-sketches}
+
+Sketches depicting both the desired dataset and the graphs generated in this analysis are available in the GitHub Repository.
+
+## Data Cleaning {#sec-appendix-cleaning}
+
+The data cleaning process involved filtering out some of the columns from the raw dataset and renaming some of the data entries for clarity and simplicity.
+
+## Attribution Statement {#sec-appendix-attribution}
+
+"Contains information licensed under the Open Government Licence – Toronto" [@tphlicense].
+
+\newpage
+
+# References {#sec-references}
