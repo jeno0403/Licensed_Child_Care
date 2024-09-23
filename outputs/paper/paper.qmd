@@ -2,7 +2,7 @@
 title: "Trends in Toronto's Licensed Childcare Centres: Analyzing Age Group Capacity and Availability Disparities"
 author: 
   - Jinyan Wei
-thanks: "A GitHub Repository containing all data, R code, and other files used in this investigation is located here: <https://github.com/jeno0403/Licensed_Childcare_TRT>" 
+thanks: "A GitHub Repository containing all data, R code, and other files used in this investigation is located here: <https://github.com/jeno0403/Licensed_Child_Care.git>" 
 date: today
 date-format: long
 abstract: "This study explores the distribution of licensed childcare spaces across Toronto’s wards, emphasizing disparities in age group availability and the provision of subsidies. Building on Cleveland’s (2018) work on affordability challenges in Ontario, the analysis highlights a shortage of spaces for infants and toddlers, with most capacity dedicated to preschool and school-aged children. Drawing on Miller and Schrager’s (2000) findings regarding regional disparities in childcare access, the study uncovers significant differences between wards, with Ward 14 having more than twice the childcare spaces of Ward 25. The findings suggest the need for policy interventions to address these inequities and improve access citywide."
