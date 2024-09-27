@@ -4,7 +4,7 @@
 # Date: 24 September 2024
 # Contact: jinyan.wei@mail.utoronto.ca
 # License: MIT
-# Pre-requisites: The dataset used for cleaning and filtering must be in the correct format 
+# Pre-requisites: The dataset used for cleaning and filtering must be in the correct format
 # (CSV file with columns such as 'LOC_ID', 'LOC_NAME', 'AUSPICE', and various space types like 'IGSPACE').
 # Any other information needed? Make sure that the tidyverse package is installed.
 
@@ -17,12 +17,10 @@ library(tidyverse)
 childcare_raw_data <- read_csv("inputs/data/raw_data/childcare_raw_data.csv")
 
 #### Cleaning the Dataset ####
-childcare_cleaned_data <- 
-  childcare_raw_data |> 
-  
+childcare_cleaned_data <-
+  childcare_raw_data |>
   # Select the columns of interest (add more columns if needed)
-  select(LOC_ID, LOC_NAME, AUSPICE, IGSPACE, TGSPACE, PGSPACE, KGSPACE, SGSPACE) |> 
-  
+  select(LOC_ID, LOC_NAME, AUSPICE, IGSPACE, TGSPACE, PGSPACE, KGSPACE, SGSPACE) |>
   # Rename the space columns to more descriptive names
   rename(
     InfantSpace = IGSPACE,
@@ -30,8 +28,7 @@ childcare_cleaned_data <-
     PreschoolSpace = PGSPACE,
     KindergartenSpace = KGSPACE,
     SchoolAgeSpace = SGSPACE
-  ) |> 
-  
+  ) |>
   # Example of additional transformation if needed
   mutate(
     AUSPICE = case_when(
@@ -43,4 +40,3 @@ childcare_cleaned_data <-
 
 #### Saving the Cleaned Dataset ####
 write_csv(childcare_cleaned_data, "outputs/data/childcare_cleaned_data.csv")
-

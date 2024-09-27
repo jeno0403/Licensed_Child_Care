@@ -14,9 +14,9 @@ library(tidyverse)
 #### Loading the Original Data ####
 
 # Load the dataset (make sure the path is correct)
-childcare_data <- read.csv("outputs/data/childcare.csv")
+childcare_data <- read.csv("inputs/data/raw_data/childcare_raw_data.csv")
 
-#### Data Simulation ####
+#### Set seed ####
 
 set.seed(345)
 
@@ -25,30 +25,34 @@ simulated_childcare_data <-
   tibble(
     # ID for each childcare center
     "ID" = 1:1000,
-    
+
     # Randomly choosing a type of management (Auspice) for 1000 centers
     "Auspice" = sample(
       x = unique(childcare_data$AUSPICE),
       size = 1000,
-      replace = TRUE),
-    
+      replace = TRUE
+    ),
+
     # Randomly choosing the ward for each center
     "Ward" = sample(
       x = unique(childcare_data$ward),
       size = 1000,
-      replace = TRUE),
-    
+      replace = TRUE
+    ),
+
     # Randomly choosing the total spaces for each center
     "Total Spaces" = sample(
       x = unique(childcare_data$TOTSPACE),
       size = 1000,
-      replace = TRUE),
-    
+      replace = TRUE
+    ),
+
     # Randomly assigning subsidy status (Y/N)
     "Subsidy" = sample(
       x = unique(childcare_data$subsidy),
       size = 1000,
-      replace = TRUE)
+      replace = TRUE
+    )
   )
 
 #### Testing the Simulated Dataset ####
@@ -72,4 +76,3 @@ sort(unique(simulated_childcare_data$Subsidy)) == sort(c("Y", "N"))
 min(simulated_childcare_data$`Total Spaces`) >= 0
 
 #### End of Simulation and Testing ####
-

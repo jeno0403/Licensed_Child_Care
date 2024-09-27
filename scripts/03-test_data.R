@@ -14,7 +14,7 @@ library(tidyverse)
 #### Testing the Cleaned Dataset ####
 
 # Loading the cleaned dataset
-childcare_cleaned_data <- read_csv("inputs/data/childcare_cleaned_data.csv")
+childcare_cleaned_data <- read_csv("outputs/data/childcare_cleaned_data.csv")
 
 # Running the tests on the cleaned dataset
 

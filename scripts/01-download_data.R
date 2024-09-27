@@ -30,12 +30,10 @@ childcare_licence_resources <- childcare_licence_packages %>%
 childcare_licence_resources
 
 # Download the .csv dataset
-childcare_licence_statistics <- childcare_licence_resources[3,] %>%
+childcare_licence_statistics <- childcare_licence_resources[3, ] %>%
   get_resource()
 childcare_licence_statistics
 # Save the file in the home directory to check if it's a directory permission issue
 write_csv(childcare_licence_statistics, "childcare_raw_data.csv")
 # Save the dataset again to the correct directory
 write_csv(childcare_licence_statistics, "inputs/data/raw_data/childcare_raw_data.csv")
-
-
