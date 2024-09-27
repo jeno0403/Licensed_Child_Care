@@ -2,24 +2,29 @@
 
 ## Overview
 
-This GitHub Repository contains all files used to generate the paper "Trends in Toronto's Licensed Childcare Centres: Analyzing Age Group Capacity and Availability Disparities."
+This GitHub Repository contains all files used to generate the paper "Trends in Toronto's Licensed Childcare Centres: Analyzing Age Group Capacity and Availability Disparities." It analyzes childcare availability across age groups and wards using geographic data based on the NAD27 datum for accurate spatial analysis. Some R scripts were adapted from Cleveland (2018) and Alexander (2023). The project uses linting and styling tools to ensure code quality.
 
-Some of the R code used to create this work was adapted from Cleveland (2018) and Alexander (2023). The dataset uses geographic coordinates (latitude and longitude) based on the NAD27 datum (North American Datum of 1927), a geodetic reference system primarily used in North America. This system ensures precise location data for each child care center, facilitating accurate mapping and spatial analysis across Toronto.
+# How to Run
 
-The R code was checked for style and syntax using the lintr and styler packages to ensure code quality and readability.
+1. `scripts/00-simulate_data.R` - (If necessary) Simulate data for the project.
+2. `scripts/01-download_data.R` - Download the required datasets from Open Data Toronto.
+3. `scripts/02-data_cleaning.R` - Clean and prepare the downloaded data for analysis.
+4. `scripts/03-test_data.R` - Test the cleaned data for consistency and accuracy.
+5. `outputs/paper.qmd` - Render the final paper into PDF format using Quarto.
+
 
 ## File Structure
 
 The repo is structured as:
 
-- `inputs/data` includes the raw data used in this investigation on childcare spaces in Toronto.
-- `inputs/literature` includes copies of references used in this analysis, particularly on urban childcare disparities and policy.
-- `outputs/data` includes the cleaned data used in this paper.
-- `outputs/graph` includes generated graph using the cleaned data.
-- `outputs/paper` includes a PDF version of the final paper, the Quarto file used to create the PDF, and a file containing the references for the paper.
-- `scripts` includes R scripts for data simulation, downloading, cleaning, and analysis.
-- `other/llm` includes a record of LLM usage in the text format.
-- `other/sketches` includes drafts of graphs and summaries used in this report.
+- `inputs/data` : Raw data on childcare spaces
+- `inputs/literature` : References on childcare disparities and policy.
+- `outputs/data` :Cleaned data.
+- `outputs/graph`: Generated graphs from the data.
+- `outputs/paper`: Final paper (PDF, Quarto file, references).
+- `scripts`: R scripts for data simulation, download, cleaning, and analysis.
+- `other/llm`: Record of LLM usage.
+- `other/sketches`: Sketch of graphs and summaries.
 
 ## Statement on LLM usage
 
