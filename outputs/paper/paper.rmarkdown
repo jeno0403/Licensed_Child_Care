@@ -11,6 +11,7 @@ format: pdf
 number-sections: true
 bibliography: references.bib
 ---
+
 ```{r}
 #| echo: false
 #| warning: false
@@ -39,6 +40,8 @@ library(kableExtra)
 
 ```
 
+
+
 # Introduction {#sec-introduction}
 
 Childcare is a fundamental service that supports both the developmental needs of children and the economic participation of families. In urban centers like Toronto, the availability of licensed childcare spaces plays a critical role in facilitating early childhood education and allowing parents, particularly mothers, to engage in the workforce. However, despite the increasing demand for childcare services, the distribution of licensed childcare spaces remains uneven across different age groups and geographic areas. This project analyzes the allocation of childcare spaces in Toronto, focusing on key age groups, including infants, toddlers, preschoolers, and school-aged children, to identify gaps in service provision and potential areas for policy intervention [@Cleveland2018].
@@ -66,6 +69,8 @@ For this analysis, the R programming language [@citeR] and the tidyverse package
 \newpage
 ## Results {#sec-data-results}
 
+
+
 ```{r}
 #| echo: false
 #| warning: false
@@ -91,10 +96,14 @@ head(childcare_cleaned_data %>%
 
 ```
 
+
+
 After loading the dataset using the R programming language [@citeR], the tidyverse [@citetidyverse], knitr [@citeknitr], and kableExtra [@citekableExtra] packages were used to generate and format tables and graphs. In doing so, R code was adapted from @tellingstorieswithdata.
 
 
 \newpage
+
+
 
 ```{r}
 #| echo: false
@@ -123,7 +132,6 @@ space_data <- space_data |>
 
 ```
 
-
 ```{r}
 #| echo: false
 #| warning: false
@@ -140,14 +148,19 @@ ggplot(space_data, aes(x = reorder(`Management Type`, -`Number of Centers`),
   geom_col() +
   theme_classic() +
   labs(x = "Management Type", y = "Number of Centers") +
+  ggtitle("Distribution of Childcare Centers by Management Type") + 
   geom_text(aes(label = `Label`), vjust = -0.15, colour = "blue")
 
 ```
+
+
 
 @fig-childcare-centers-by-management-type illustrates the distribution of licensed childcare centers in Toronto by management type in 2023. Non-profit organizations manage the majority, approximately 66%, reflecting the city's emphasis on accessibility and public service. Commercially run centers account for 30%, while publicly operated centers represent only 4%. This breakdown highlights the dominant role of non-profits in providing affordable and accessible childcare, as discussed by @Cleveland2018. Similar trends in public and non-profit childcare systems have been explored in Washington State [@miller2000licensed]. Additionally, the focus on childcare structure may influence critical areas like infant care practices, as noted by @Gershon1997.
 
 
 \newpage
+
+
 
 ```{r}
 #| echo: false
@@ -200,17 +213,22 @@ space_data <- space_data %>%
 ggplot(space_data, aes(x = `Age Group`, y = `Total Spaces`)) +
   geom_col(fill = "lightcoral") +
   geom_text(aes(label = Label), vjust = -0.15, color = "blue") +
-  labs(x = "Age Group", y = "Total Spaces") +
+  labs(title = "Distribution of Childcare Spaces by Age Group with Percentage Labels", 
+       x = "Age Group", y = "Total Spaces") +
   theme_minimal()
 
 
 
 ```
 
+
+
 @fig-childcare-spaces-by-age-group shows the distribution of childcare spaces across different age groups in Toronto. Preschool-aged children have the highest number of spaces, comprising 31.7% of the total, followed closely by spaces for school-aged children, which account for 29%. Toddler spaces make up 15.1%, and kindergarten-aged children represent 19.2% of the total spaces available. Spaces for infants are the fewest, representing only 5% of the total. This distribution reflects the higher demand for preschool and school-age childcare services, as noted in studies such as @Cleveland2018, highlighting the need for targeted investment in early education and childcare accessibility.
 
 
 \newpage
+
+
 
 ```{r}
 #| echo: false
@@ -245,7 +263,7 @@ childcare_comparison_long <- childcare_comparison %>%
 
 ggplot(childcare_comparison_long, aes(x = AUSPICE, y = Spaces, fill = AgeGroup)) +
   geom_bar(stat = "identity", position = "dodge", width = 0.7) +
-  labs(title = "",
+  labs(title = "Infant vs School-Age Childcare Spaces\nby Auspice in Toronto, 2023",
        x = "Auspice", 
        y = "Childcare Spaces", fill = "Age Group") +  # Keep the legend
   theme_minimal() +
@@ -263,6 +281,8 @@ ggplot(childcare_comparison_long, aes(x = AUSPICE, y = Spaces, fill = AgeGroup))
   scale_fill_manual(values = c("#E69F00", "#56B4E9"), labels = c("Infant", "School Age"))  # Custom colors for fill
 
 ```
+
+
 @fig-infant-vs-schoolage compares Infant and School-Age childcare spaces by management type in Toronto (2023). Non-Profit centers allocate the most spaces, particularly for School-Age children, while Commercial centers also favor School-Age spaces but on a smaller scale. Public (City Operated) Agencies offer the fewest spaces overall, maintaining the same trend. This reflects an emphasis on care for older children across all types, consistent with findings in other cities see @Cleveland2018, while Infant spaces remain limited due to higher costs and resource needs @miller2000licensed.
 
 
