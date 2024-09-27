@@ -4,7 +4,7 @@
 
 This GitHub Repository contains all files used to generate the paper "Trends in Toronto's Licensed Childcare Centres: Analyzing Age Group Capacity and Availability Disparities."
 
-Some of the R code used to create this work was adapted from Cleveland (2018) and Alexander (2023).
+Some of the R code used to create this work was adapted from Cleveland (2018) and Alexander (2023). The dataset uses geographic coordinates (latitude and longitude) based on the NAD27 datum (North American Datum of 1927), a geodetic reference system primarily used in North America. This system ensures precise location data for each child care center, facilitating accurate mapping and spatial analysis across Toronto.
 
 ## File Structure
 
