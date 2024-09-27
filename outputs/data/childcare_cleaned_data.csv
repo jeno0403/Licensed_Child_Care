@@ -27,7 +27,7 @@ LOC_ID,LOC_NAME,AUSPICE,InfantSpace,ToddlerSpace,PreschoolSpace,KindergartenSpac
 1094,Arbor Glen Community Child Care Centre,Non-Profit,0,0,24,26,45
 1095,Frankland Day Care Centre,Non-Profit,0,0,0,26,50
 1098,Early Adventures Nursery School & Child Care,Commercial,0,15,24,26,30
-1101,Beatty Buddies Daycare,Non-Profit,0,15,40,52,75
+1101,Beatty Buddies Daycare,Non-Profit,0,15,40,65,90
 1103,Selwyn Community Child Care Centre,Non-Profit,0,0,22,33,35
 1104,Mandi Day Care,Non-Profit,0,25,32,0,15
 1107,Educare Kindergarten - Rathburn,Commercial,0,10,24,0,30
@@ -58,7 +58,7 @@ LOC_ID,LOC_NAME,AUSPICE,InfantSpace,ToddlerSpace,PreschoolSpace,KindergartenSpac
 1193,Childspace Day Care Corporation # 1 (50 Woodmount),Non-Profit,0,0,0,52,68
 1194,Royal Day Care Centre Weston Inc,Commercial,0,10,56,0,39
 1196,Rosalie Hall Early Learning And Child Care Centre,Non-Profit,30,25,24,0,0
-1200,Alpha,Non-Profit,0,0,0,0,30
+1200,Alpha Site,Non-Profit,0,0,0,0,30
 1201,Humewood Day Care Centre,Non-Profit,0,0,32,52,30
 1204,Rexdale Day Nursery,Non-Profit,0,0,48,0,25
 1205,Sandbox Day Care Centre,Commercial,0,10,38,12,28
@@ -75,9 +75,8 @@ LOC_ID,LOC_NAME,AUSPICE,InfantSpace,ToddlerSpace,PreschoolSpace,KindergartenSpac
 1250,Sunny Faces Day Care Centre - Rivercrest,Non-Profit,0,0,24,26,50
 1254,Baycrest Child Care Centre,Non-Profit,10,30,48,52,30
 1255,Campus Community Co-Operative Day Care,Non-Profit,10,15,24,0,0
-1258,Carmelite Day Nursery,Non-Profit,16,25,48,44,42
 1266,Network Child Care Services - Just Kids Child Care Centre,Non-Profit,10,20,32,0,0
-1267,Plains Road Child Care Inc.,Non-Profit,10,20,32,26,30
+1267,Plains Road Child Care Inc.,Non-Profit,10,20,32,52,30
 1271,J.R. Wilcox Day Care Centre,Non-Profit,10,15,24,39,45
 1272,Lef- Silverthorn Early Learning Earth Centre,Non-Profit,10,10,16,0,0
 1278,Sheppard Square Day Nursery,Commercial,10,30,48,0,30
@@ -100,7 +99,7 @@ LOC_ID,LOC_NAME,AUSPICE,InfantSpace,ToddlerSpace,PreschoolSpace,KindergartenSpac
 1348,Brookhaven Child Care,Non-Profit,0,15,24,52,60
 1350,Terry Tan Child Care (Rossburn) Facility #4450,Non-Profit,10,10,32,26,30
 1351,Birchmount Place Centre For Early Learning,Commercial,10,15,32,0,24
-1356,Vincent Massey Academy - (521909 Ontario Ltd.),Commercial,0,45,48,0,0
+1356,Vincent Massey Academy - (521909 Ontario Ltd.),Commercial,0,15,64,0,0
 1360,Immanuel Child Care Centre,Non-Profit,0,30,56,0,0
 1361,Dandylion Childcare Centre,Non-Profit,0,0,32,78,150
 1367,Kiddies Lodge Day Care Centre,Commercial,0,15,24,0,30
@@ -241,7 +240,6 @@ LOC_ID,LOC_NAME,AUSPICE,InfantSpace,ToddlerSpace,PreschoolSpace,KindergartenSpac
 1819,Bloorcourt Village Early Learning Centre,Commercial,10,30,36,0,30
 1823,Sunnyside Garden Day Care,Non-Profit,0,15,23,65,90
 1824,Ryerson Early Learning Centre (Ryerson University),Non-Profit,0,15,24,0,0
-1827,Upper Yonge Village Day Care Centre,Non-Profit,10,25,24,0,0
 1832,Candy Factory Swallows Day Care (The),Commercial,10,25,40,0,0
 1833,University Settlement Day Care Centre,Non-Profit,10,15,24,0,0
 1835,George Brown - Casa Loma Child Care Centre,Non-Profit,10,15,40,0,0
@@ -507,6 +505,7 @@ LOC_ID,LOC_NAME,AUSPICE,InfantSpace,ToddlerSpace,PreschoolSpace,KindergartenSpac
 7712,Scarborough Citadel Child Care,Non-Profit,10,15,24,0,0
 7766,Maplewood Before And After School Care,Non-Profit,0,0,0,0,90
 7818,Ascot Avenue Community Day Care,Non-Profit,0,0,0,65,105
+7939,Plasp Holy Angels Catholic School,Non-Profit,0,0,0,13,30
 7978,Future Stars Child Care Centre,Commercial,0,0,24,0,28
 7981,Petite Maison Montessori,Commercial,0,15,48,0,0
 7987,Broadlands School Age Program Ymca,Non-Profit,0,0,0,13,45
@@ -582,7 +581,7 @@ LOC_ID,LOC_NAME,AUSPICE,InfantSpace,ToddlerSpace,PreschoolSpace,KindergartenSpac
 10337,Friendly Little Campus (2037711 Ontario Ltd),Commercial,10,10,16,0,0
 10338,Kids & Company - Finch Site,Commercial,10,25,30,0,0
 10347,Lily's House Inc.,Commercial,0,15,0,0,0
-10396,Garderie La Farandole Felix-Leclerc,Non-Profit,0,0,24,13,30
+10396,Garderie La Farandole Felix-Leclerc,Non-Profit,0,0,24,26,30
 10418,Eyet Early Learning Centre (Annies Place),Non-Profit,0,0,16,52,90
 10432,Absorbent Minds (Op: 1756925 Ontario Inc.),Commercial,0,10,11,30,0
 10439,Central Montessori Schools - Willowdale Campus,Commercial,0,14,48,0,0
@@ -628,7 +627,7 @@ LOC_ID,LOC_NAME,AUSPICE,InfantSpace,ToddlerSpace,PreschoolSpace,KindergartenSpac
 11772,Thorncliffe Park Day Care Centre,Non-Profit,10,10,32,0,0
 11785,Heritage Child Care & Early Learning Centre,Non-Profit,0,10,24,0,15
 11787,Winchester Site Day Care (Central Neighbourhood House),Non-Profit,0,0,24,52,30
-11809,Kreative Kids Child Care Centre,Non-Profit,0,10,16,13,30
+11809,Kreative Kids Child Care Centre,Non-Profit,0,10,16,26,30
 11818,Distillery District Early Learning Centre,Commercial,0,40,40,0,0
 11820,All About Kids Sheppard,Commercial,10,30,24,0,0
 11821,Kids & Company - Consumers Site,Commercial,20,30,48,0,0
@@ -679,7 +678,7 @@ LOC_ID,LOC_NAME,AUSPICE,InfantSpace,ToddlerSpace,PreschoolSpace,KindergartenSpac
 12305,Curlew Montessori School,Commercial,0,10,48,0,0
 12308,Brightpath Academy - Wanless Park (20),Commercial,0,20,16,0,0
 12309,Green Apple Kids,Commercial,10,40,80,0,0
-12333,Jingbao Bilingual Children's Centre - Scarborough,Non-Profit,0,0,24,18,0
+12333,Jingbao Bilingual Children's Centre - Scarborough,Non-Profit,0,0,24,44,0
 12335,Children's Garden Junior School - Early Start,Commercial,0,0,32,0,0
 12336,Macaulay - Warren Park Child Care Centre,Non-Profit,0,0,24,26,45
 12337,Three R's Schoolhouse Inc.,Commercial,0,15,48,0,30
@@ -889,7 +888,7 @@ LOC_ID,LOC_NAME,AUSPICE,InfantSpace,ToddlerSpace,PreschoolSpace,KindergartenSpac
 13761,Central Montessori Schools - Maplehurst Campus,Commercial,0,0,64,0,0
 13780,Agile Innovators Montessori,Commercial,0,15,44,0,0
 13782,Alphabet Treehouse Childcare Centre,Commercial,20,45,75,0,0
-13783,Lullaboo Nursery And Childcare Center,Commercial,20,75,96,26,0
+13783,Lullaboo Nursery And Childcare Center,Commercial,20,75,120,0,0
 13802,Lynnwood Heights Junior Public School,Non-Profit,0,0,0,13,15
 13806,St. Ursula Licensed Before And After School Program,Non-Profit,0,0,0,26,30
 13807,St. Columba Catholic School,Non-Profit,10,15,24,26,60
