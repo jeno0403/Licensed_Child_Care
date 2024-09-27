@@ -75,7 +75,7 @@ For this analysis, the R programming language [@citeR] and the tidyverse package
 
 childcare_cleaned_data <- read_csv(here::here("outputs/data/childcare_cleaned_data.csv"))
 
-# Display the first 6 rows using kable with the correct number of columns
+# Display the first 6 rows using kable function
 head(childcare_cleaned_data %>%
        select(LOC_ID, LOC_NAME, AUSPICE), 6) |>
   kable(
@@ -101,7 +101,9 @@ After loading the dataset using the R programming language [@citeR], the tidyver
 #| warning: false
 
 #### First Graph Labels ####
-# This code is based on knowledge from Alexander (2024).
+
+# This code is based on knowledge from Alexander (2023).
+
 # Calculating total spaces and percentage by management type (AUSPICE)
 df_childcare <- childcare_cleaned_data
 space_data <- df_childcare |>
@@ -130,14 +132,15 @@ space_data <- space_data |>
 
 #### First Graph ####
 
-# This code is based on knowledge from Alexander (2024).
+# This code is based on knowledge from Alexander (2023).
 
 # Generating the bar chart with labels
-ggplot(space_data, aes(x = reorder(`Management Type`, -`Number of Centers`), y = `Number of Centers`)) +
+ggplot(space_data, aes(x = reorder(`Management Type`, -`Number of Centers`), 
+                       y = `Number of Centers`)) +
   geom_col() +
   theme_classic() +
   labs(x = "Management Type", y = "Number of Centers") +
-  ggtitle("Distribution of Childcare Centers by Management Type") +  # Adding the title
+  ggtitle("Distribution of Childcare Centers by Management Type") + 
   geom_text(aes(label = `Label`), vjust = -0.15, colour = "blue")
 
 ```
@@ -151,12 +154,10 @@ ggplot(space_data, aes(x = reorder(`Management Type`, -`Number of Centers`), y =
 #| echo: false
 #| warning: false
 #### Second Graph Labels ####
+
 # Load required libraries
 library(ggplot2)
 library(dplyr)
-
-# Assuming the cleaned childcare data is in a dataframe called 'childcare_cleaned_data'
-# Summing up the number of spaces by age group and calculating percentages
 
 # List of new space columns from the cleaned dataset
 space_columns <- c("InfantSpace", "ToddlerSpace", "PreschoolSpace", "KindergartenSpace", "SchoolAgeSpace")
@@ -178,14 +179,12 @@ space_data <- childcare_cleaned_data %>%
       KindergartenSpace = "Kindergarten",
       SchoolAgeSpace = "School Age"
     ),
-    `Percentage of Total` = round(100 * `Total Spaces` / sum(`Total Spaces`), 1)  # This was incomplete in the previous code
+    `Percentage of Total` = round(100 * `Total Spaces` / sum(`Total Spaces`), 1)
   )
 
 # Creating labels
 space_data <- space_data %>%
   mutate(Label = paste(`Total Spaces`, " (", `Percentage of Total`, "%)", sep = ""))
-
-
           
 ```
 
@@ -196,7 +195,9 @@ space_data <- space_data %>%
 #| fig-cap: "Distribution of childcare spaces by age group in Toronto in 2023, with percentage labels."
 
 #### Second Graph ####
+
 # Generating the bar chart with percentage labels
+
 ggplot(space_data, aes(x = `Age Group`, y = `Total Spaces`)) +
   geom_col(fill = "lightcoral") +
   geom_text(aes(label = Label), vjust = -0.15, color = "blue") +
@@ -223,19 +224,16 @@ library(ggplot2)
 library(dplyr)
 library(tidyr)
 
-# Step 1: Prepare a dataset comparing infant and school-age spaces
+# Prepare a dataset comparing infant and school-age spaces
 childcare_comparison <- childcare_cleaned_data %>%
   select(AUSPICE, InfantSpace, SchoolAgeSpace)
 
 childcare_comparison$AUSPICE <- gsub("\\(.*\\)", "", childcare_comparison$AUSPICE)
 
-# Step 2: Reshape data to long format for easier plotting
+# Reshape data for plotting
 childcare_comparison_long <- childcare_comparison %>%
   pivot_longer(cols = c(InfantSpace, SchoolAgeSpace), 
                names_to = "AgeGroup", values_to = "Spaces")
-
-# Step 3: Calculate total spaces per center (for proper ordering)
-
 
 ```
 
@@ -246,22 +244,23 @@ childcare_comparison_long <- childcare_comparison %>%
 #| fig-cap: "Infant vs School-Age Childcare Spaces by Center in Toronto, 2023."
 
 #### Third Graph ####
+
 ggplot(childcare_comparison_long, aes(x = AUSPICE, y = Spaces, fill = AgeGroup)) +
-  geom_bar(stat = "identity", position = "dodge", width = 0.7) +  # Adjust bar width for tighter spacing
-  labs(title = "Infant vs School-Age Childcare Spaces\nby Auspice in Toronto, 2023",  # Improved title with a line break
+  geom_bar(stat = "identity", position = "dodge", width = 0.7) +
+  labs(title = "Infant vs School-Age Childcare Spaces\nby Auspice in Toronto, 2023",
        x = "Auspice", 
        y = "Childcare Spaces", fill = "Age Group") +  # Keep the legend
   theme_minimal() +
   theme(
-    plot.title = element_text(size = 16, face = "bold", hjust = 0.5, margin = margin(b = 15)),  # Centered and bold title
-    axis.title.x = element_text(size = 12, margin = margin(t = 10)),  # Adjust x-axis label size and margin
+    plot.title = element_text(size = 16, face = "bold", hjust = 0.5, margin = margin(b = 15)),  
+    axis.title.x = element_text(size = 12, margin = margin(t = 10)),
     axis.title.y = element_text(size = 12),
-    axis.text.y = element_text(size = 10),  # Adjust y-axis text size
-    axis.text.x = element_text(size = 10, angle = 0),  # Horizontal x-axis text for better readability
-    plot.margin = margin(20, 20, 20, 20),  # Adjust margins to avoid cutoff
+    axis.text.y = element_text(size = 10),
+    axis.text.x = element_text(size = 10, angle = 0), 
+    plot.margin = margin(20, 20, 20, 20), 
     legend.position = "right",  # Keep legend on the right
-    legend.text = element_text(size = 10),  # Adjust legend text size
-    legend.title = element_text(size = 12)  # Adjust legend title size
+    legend.text = element_text(size = 10),
+    legend.title = element_text(size = 12)
   ) +
   scale_fill_manual(values = c("#E69F00", "#56B4E9"), labels = c("Infant", "School Age"))  # Custom colors for fill
 
